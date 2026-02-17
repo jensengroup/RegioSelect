@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta name="index" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie-edge">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='image/icon.png') }}">
+    <title>RegioSelect Results</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="RegioSelect logo" class="logo-image">
+            </a>
+        </div>
+        
+        {% if regioselect_res.ml_status == 'complete' %}
+            <h3>Prediction Results</h3>
+
+            <!-- <div class="text-holder1">SMILES:</div> -->
+            <div class="text-holder2">{{ regioselect_res.rdkit_smiles }}</div>
+            
+            <!-- <img id="moleculeImage" src="/smiles_to_image/{{ regioselect_res.rdkit_smiles }}?hash_code={{ regioselect_res.hash_code }}&table_name=df_elec" alt="Molecule" /> -->
+            <img id="moleculeImage" src="" alt="Molecule" />
+            
+            <h3></h3>
+            <div class="segmented-control">
+                <input type="radio" id="eas" name="pred_type" value="eas">
+                <label for="eas" class="enabled-label" data-tooltip="Electrophilic Aromatic Substitution">EAS</label>
+                
+                <input type="radio" id="bde" name="pred_type" value="bde">
+                <label for="bde" class="enabled-label" data-tooltip="C-H BDE">C-H BDE</label>
+
+                <input type="radio" id="pka" name="pred_type" value="pka">
+                <label for="pka" class="enabled-label" data-tooltip="C-H pKa">C-H pKa</label>
+
+                <input type="radio" id="ha" name="pred_type" value="ha">
+                <label for="ha" class="enabled-label" data-tooltip="Hydride Affinity">HA</label>
+
+                <input type="radio" id="mca" name="pred_type" value="mca">
+                <label for="mca" class="enabled-label" data-tooltip="Nucleophilicity | Methyl Cation Affinity">MCA</label>
+            
+                <input type="radio" id="maa" name="pred_type" value="maa" checked>
+                <label for="maa" class="enabled-label" data-tooltip="Electrophilicity | Methyl Anion Affinity">MAA</label>
+
+                <input type="radio" id="Sterics" name="pred_type" value="Sterics">
+                <label for="Sterics" class="enabled-label" data-tooltip="Sterics">Sterics</label>
+            </div>
+
+            <div id="eas_table" class="tables-container" style="display: none;">
+                <div class="table">
+                    {{ table_eas|safe }}
+                </div>
+            </div>
+            <div id="bde_table" class="tables-container" style="display: none;">
+                <div class="table">
+                    {{ table_bde|safe }}
+                </div>
+            </div>
+            <div id="pka_table" class="tables-container" style="display: none;">
+                <div class="table">
+                    {{ table_pka|safe }}
+                </div>
+            </div>
+            <div id="ha_table" class="tables-container" style="display: none;">
+                <div class="table">
+                    {{ table_ha|safe }}
+                </div>
+            </div>
+            <div id="mca_table" class="tables-container" style="display: none;">
+                <div class="table">
+                    {{ table_nuc|safe }}
+                </div>
+            </div>
+            <div id="maa_table" class="tables-container" style="display: flex;"> <!-- This one is visible by default -->
+                <div class="table">
+                    {{ table_elec|safe }}
+                </div>
+            </div>
+            <div id="sterics_table" class="tables-container" style="display: none;"> 
+                <div class="table">
+                    {{ table_steric|safe }}
+                </div>
+            </div>
+
+            <div class="form-container">
+                <a href="/" class="button back-button">Create New Prediction</a>
+            </div>
+            
+        {% else %}
+            <h3>Predictions in Progress</h3>
+            
+            <div class="text-holder2">{{ regioselect_res.rdkit_smiles }}</div>
+            
+            <p>
+                Please wait while the predictions are being performed
+                or save this link for later access...
+            </p>
+            
+            <div class="form-container">
+                <button class="button" id="copy-link-button">Copy Link</button>
+                <a href="/" class="button back-button">Create New Prediction</a>
+            </div>
+
+            <script>
+                var hash_code = "{{ regioselect_res.hash_code }}";      
+                
+                // Periodically check if predictions are complete
+                function checkResults() {
+                    fetch(`/check_MLresults/${hash_code}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'complete') {
+                                window.location.href = `/MLresults/${hash_code}`;
+                            } else if (data.status === 'error') {
+                                window.location.href = `/MLresults/${hash_code}`;
+                            } else {
+                                setTimeout(checkResults, 1000); // Check again in 1 second
+                            }
+                        });
+                }
+                
+                checkResults(); // Start checking immediately
+            </script>
+        {% endif %}
+        
+        <footer class="footnote">
+            <p>©️ 2024 Jan H. Jensen Research Group of the Department of Chemistry, University of Copenhagen. Submit issues on <a href="https://github.com/jensengroup/regioselect">GitHub</a>.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to copy the current page URL to the clipboard
+        function copyCurrentPageLink() {
+            var currentURL = window.location.href;
+    
+            // Create a temporary input element
+            var tempInput = document.createElement("input");
+            tempInput.value = currentURL;
+            document.body.appendChild(tempInput);
+    
+            // Select the URL text
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile devices
+    
+            // Copy the URL to the clipboard
+            document.execCommand("copy");
+            
+            // Remove the temporary input element
+            document.body.removeChild(tempInput);
+    
+            // Provide feedback to the user (e.g., change button text)
+            var copyButton = document.getElementById("copy-link-button");
+            copyButton.textContent = "Link Copied!";
+            setTimeout(function() {
+                copyButton.textContent = "Copy Link";
+            }, 2000); // Reset button text after 2 seconds
+        }
+    
+        // Attach the copy link function to the button click event
+        document.getElementById("copy-link-button").addEventListener("click", copyCurrentPageLink);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get a reference to all links with the class "show-structure-link"
+            const showLinks = document.querySelectorAll('.show-structure-link');
+    
+            // Add a click event listener to each link
+            showLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    // Prevent the link from navigating to a new page
+                    event.preventDefault();
+    
+                    // Get the SDF file path from the link's data-sdf attribute
+                    const sdfPath = link.getAttribute('sdf_path');
+                    const atomId = link.getAttribute('data-atom-id');
+    
+                    // Open a new pop-up window
+                    window.open(`/MLviewer/${sdfPath}?atomId=${atomId}`, 'popupWindow', 'width=800,height=600');
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to hide all tables
+            function hideAllTables() {
+                var tables = document.querySelectorAll('.tables-container');
+                tables.forEach(function(table) {
+                    table.style.display = 'none';  // Hide all tables
+                });
+            }
+
+            // Function to show a specific table
+            function showTable(tableId) {
+                var table = document.getElementById(tableId);
+                if (table) {
+                    table.style.display = 'flex';  // Only show the selected table
+                }
+            }
+
+            var smiles = "{{ regioselect_res.rdkit_smiles }}";
+            var hash_code = "{{ regioselect_res.hash_code }}";
+
+            // Set the default table and image
+            hideAllTables();
+            showTable('maa_table');
+            document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_elec`;
+        
+            // Event listeners for each prediction type button
+            document.getElementById('eas').addEventListener('click', function() {
+                hideAllTables();
+                showTable('eas_table');
+                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_eas`;
+            });
+            document.getElementById('bde').addEventListener('click', function() {
+                hideAllTables();
+                showTable('bde_table');
+                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_bde`;
+            });
+            document.getElementById('pka').addEventListener('click', function() {
+                hideAllTables();
+                showTable('pka_table');
+                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_pka`;
+            });
+            document.getElementById('ha').addEventListener('click', function() {
+                hideAllTables();
+                showTable('ha_table');
+                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_ha`;
+            });
+            document.getElementById('mca').addEventListener('click', function() {
+                hideAllTables();
+                showTable('mca_table');
+                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_nuc`;
+            });
+            document.getElementById('maa').addEventListener('click', function() {
+                hideAllTables();
+                showTable('maa_table');
+                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_elec`;
+            });
+            document.getElementById('Sterics').addEventListener('click', function() {
+                hideAllTables();
+                showTable('sterics_table');
+                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_steric`;
+            });
+        });
+    </script>
+</body>
+</html>

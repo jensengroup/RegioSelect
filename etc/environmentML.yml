@@ -1,0 +1,19 @@
+name: esnuelML
+channels:
+  - conda-forge
+dependencies:
+  - ase=3.22.1
+  - flask
+  - numpy
+  - openbabel=3.1.1
+  - pandas=2.2.3
+  - pip
+  - python=3.9.20
+  - scikit-learn=1.0.1
+  - sqlalchemy
+  - submitit
+  - lightgbm=3.1.1
+  - pip:
+      - flask-sqlalchemy==3.0.5
+      - rdkit==2024.3.5
+      - wtforms==3.0.1

@@ -1,0 +1,300 @@
+/* styles.css */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
+}
+
+.info-container {
+    width: 80%;
+    max-width: 600px;
+    display: inline-block;
+    margin-top: -20px;
+    margin-bottom: -15px;
+}
+
+.info-container h2 {
+    margin-bottom: -5px;
+}
+
+.info-container a {
+    /* color: #0056b3; */
+    color: rgb(49, 87, 175);
+    text-decoration: none;
+}
+
+.info-container a:hover {
+    /* color: #0056b3; */
+    color: rgb(49, 87, 175);
+    text-decoration: underline;
+}
+
+h3 {
+    margin-top: 1px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #777;
+    font-size: 17px;
+}
+
+.error_message {
+    margin-top: 5px;
+    margin-bottom: -5px;
+}
+
+.form-group {
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    width: 85%;
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #777;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    margin-top: 5px;
+    transition: border-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.button {
+    background-color: #901A1E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button:hover {
+    background-color: #e55e63;
+}
+
+.logo {
+    max-width: 100%; /* Ensure the logo doesn't exceed the container's width */
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+    margin-bottom: 10px; /* Add some spacing below the logo */
+}
+
+.logo-image {
+    max-width: 100%; /* Ensure the logo fits within its containing element */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.footnote {
+    font-size: 12px;
+    opacity: 0.7;
+    text-align: center;
+    margin-bottom: -25px;
+    margin-top: 20px;
+}
+
+.footnote a {
+    color: rgb(45, 45, 45);
+    text-decoration: underline;
+}
+
+.footnote a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    margin: 0 auto;
+}
+
+.text-holder1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.text-holder2 {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.tables-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.table {
+    flex: 0 0 80%;
+    margin: 8px;
+    overflow: auto;
+    height: 360px;
+    transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+.table:hover {
+    background-color: rgb(251, 251, 251);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.table a {
+    color: black;
+}
+
+.table a:hover {
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th, td {
+    /* padding: 8px 8px; */
+    height: 50px;
+    max-width: 100px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    color: black;
+}
+
+.table th, thead {
+    background-color: #f2f2f2;
+    /* padding: 8px 4px; */
+    height: 60px;
+    position: sticky; 
+    top: 35px;
+}
+
+.table:nth-child(1) caption {
+    font-size: 18px;
+    font-weight: bold;
+    vertical-align: middle;
+    line-height: 35px;
+    height: 35px;
+    color: black;
+    /* background: #87cefa80; */
+    /* background: rgb(197, 231, 252); */
+     /* background: rgb(201, 246, 201); */
+    /* background:  #90ee9080; */
+    background:  rgb(255, 214, 214);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: sticky;
+    top: 0px;
+}
+
+
+.segmented-control {
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+ 
+.segmented-control input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+}
+ 
+.segmented-control label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: rgba(249, 249, 249, 0.5); 
+    border: 1px solid rgba(225, 225, 230, 0.5); 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.segmented-control input[type="radio"]:checked + label {
+    background-color:  #a3a2a2;
+    color: white;
+    border-color:  #a3a2a2;
+}
+
+.enabled-label:hover {
+    background-color:  #a3a2a2;
+    color: white;
+    border-color:  #a3a2a2;
+}
+
+.custom-tooltip {
+    padding: 8px 12px;
+    border: 1px solid rgb(150, 150, 150);
+    background-color: rgba(249, 249, 249, 0.95);
+    color: black;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgb(150, 150, 150);
+    max-width: 210px;
+    overflow-wrap: break-word;
+    /* transition: opacity 0.1s ease-in-out; */
+    pointer-events: auto; 
+    position: absolute;
+    z-index: 1000; 
+    text-align: center;
+}
+
+.custom-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -11px;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgb(150, 150, 150) transparent transparent;
+}

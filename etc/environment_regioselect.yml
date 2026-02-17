@@ -1,0 +1,25 @@
+name: regioselect
+channels:
+  - conda-forge
+dependencies:
+  - ase=3.22.1
+  - keras=2.11.0
+  - flask
+  - numpy
+  - pandas=2.2.3
+  - pip
+  - python
+  - scikit-learn=0.24.2
+  - sqlalchemy
+  - submitit
+  - lightgbm=3.1.1
+  - tensorboard=2.11.2
+  - tensorflow=2.11.1
+  - pip:
+      - flask-sqlalchemy==3.0.5
+      - rdkit==2024.3.5
+      - wtforms==3.0.1
+      - alfabet==0.4.1
+      - networkx==3.1
+      - nfp==0.3.12
+      - morfeus-ml==0.7.2

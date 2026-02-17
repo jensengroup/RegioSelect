@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="index" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='image/icon.png') }}">
+    <title>ESNUEL Viewer</title>
+    
+    <script type="text/javascript" src="{{ url_for('static', filename='jsmol/JSmol.min.js') }}"></script>
+    <script type="text/javascript">
+        var myJmol1;
+        var myInfo1 = {
+            height: "100%",
+            width: "100%",
+            j2sPath: "{{ url_for('static', filename='jsmol/j2s') }}",
+            use: "HTML5",
+            console: "myJmol1_infodiv",
+            disableInitialConsole: true,
+            allowJavaScript: true,
+            debug: false
+            };
+    </script>
+</head>
+<body style="background-color: #ffffff;">
+    <div id="editor-jsmol">
+        <div class="canvas_jsmol" style="width:133vmin; height:90vmin;">
+            <script type="text/javascript">
+                var queryParams = new URLSearchParams(window.location.search);
+                var atomId = parseInt(queryParams.get('atomId'), 10);  // Parse the atomId as an integer
+
+                myJmol1 = Jmol.getApplet("myJmol1", myInfo1);
+                Jmol.script(myJmol1, 'background "#ffffff"');
+                Jmol.script(myJmol1, 'set bondRadiusMilliAngstroms 100; set multipleBondSpacing -0.3; zoom ON; set zoomLarge FALSE; set language "en"');
+                Jmol.script(myJmol1, "load {{sdf_path}}");
+                Jmol.script(myJmol1, `select atomno=${atomId + 1}; halo 0.5; color halo [xff0000];`); // label "Query atom"; color label black; font label 14;
+                // Jmol.script(myJmol1, 'set echo "charge" 50% 0%; set echo "charge" center; font echo 13; color echo black; echo Bond orders are not shown.;');
+            </script>
+        </div>
+        <div class="form-container" style="text-align: center; margin-top: 5px;">
+            <a href="{{sdf_path}}" class="button">Download SDF</a>
+            <button onclick="window.close()" class="button">Close Window</button>
+        </div>
+    </div>
+</body>
+</html>
