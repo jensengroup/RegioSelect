@@ -166,9 +166,11 @@ def MLresults(hash_code):
         return render_template('MLresults.html', regioselect_res=regioselect_res, table_eas=table_eas, table_bde=table_bde, table_pka=table_pka, table_ha=table_ha, table_nuc=table_nuc, table_elec=table_elec, table_steric=table_steric)
 
 
-@app.route('/smiles_to_image/<smiles>')
-def smiles_to_image(smiles):
+@app.route('/smiles_to_image')
+def smiles_to_image():
     # Extract sites to be highlighted
+    smiles = request.args.get('smiles', type=str)
+    print(smiles, flush=True)
     hash_code = request.args.get('hash_code', type=str)
     table_name = request.args.get('table_name', type=str)
     df = pd.read_pickle(f'regioselect/data/desc_calcs/{hash_code}/{table_name}_{hash_code}.pkl')

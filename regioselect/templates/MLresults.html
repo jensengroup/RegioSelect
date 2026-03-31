@@ -210,43 +210,43 @@
             // Set the default table and image
             hideAllTables();
             showTable('maa_table');
-            document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_elec`;
+            document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_elec`;
         
             // Event listeners for each prediction type button
             document.getElementById('eas').addEventListener('click', function() {
                 hideAllTables();
                 showTable('eas_table');
-                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_eas`;
+                document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_eas`;
             });
             document.getElementById('bde').addEventListener('click', function() {
                 hideAllTables();
                 showTable('bde_table');
-                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_bde`;
+                document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_bde`;
             });
             document.getElementById('pka').addEventListener('click', function() {
                 hideAllTables();
                 showTable('pka_table');
-                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_pka`;
+                document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_pka`;
             });
             document.getElementById('ha').addEventListener('click', function() {
                 hideAllTables();
                 showTable('ha_table');
-                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_ha`;
+                document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_ha`;
             });
             document.getElementById('mca').addEventListener('click', function() {
                 hideAllTables();
                 showTable('mca_table');
-                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_nuc`;
+                document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_nuc`;
             });
             document.getElementById('maa').addEventListener('click', function() {
                 hideAllTables();
                 showTable('maa_table');
-                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_elec`;
+                document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_elec`;
             });
             document.getElementById('Sterics').addEventListener('click', function() {
                 hideAllTables();
                 showTable('sterics_table');
-                document.getElementById('moleculeImage').src = `/smiles_to_image/${encodeURIComponent(smiles)}?hash_code=${encodeURIComponent(hash_code)}&table_name=df_steric`;
+                document.getElementById('moleculeImage').src = `/smiles_to_image?smiles=${encodeURIComponent(smiles)}&hash_code=${encodeURIComponent(hash_code)}&table_name=df_steric`;
             });
         });
     </script>
